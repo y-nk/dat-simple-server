@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "tsc --project . && ef-tspm",
+    "preversion": "npm run build",
     "postversion": "cp -r ./{package.json,src,bin} lib/ && npm publish lib/ --dry-run && rm -rf lib/ && git push --follow-tags"
   },
   "keywords": [],
