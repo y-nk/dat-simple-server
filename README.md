@@ -1,14 +1,23 @@
-## dat simple server
+# dat simple server
 
-Do you remember the time you'd drop a .php file into a ftp folder, and instantly, it was deployed?
+_Do you remember the time you'd drop a .php file into a ftp folder, and instantly, it was deployed?_
 
-**well, welcome to that again.**
+**Well, welcome to that again :)**
+## Getting started
 
-This is a POC on how we can handle such a quick delivery, perfect for small projects, lonely webservices and all kind of small uses.
+You can run the server quickly with `npx dat-simple-server`.
 
-### TODO
-- [x] have a working POC
-- [ ] basic documentation
-- [ ] documentation for integration with nginx/apache
-- [x] add TS flavor
-- [x] deploy to npm
+Here are the command line options:
+
+- `--public=./www`: The public folder to serve
+- `--port=8001`: The port for your server
+- `--host=0.0.0.0`: The host for your server
+
+## Importing in an application
+
+The middleware responsible for loading the script is compatible with express and similar _(req, res)_ libraries. You can reuse it easily:
+
+```
+const { middleware } = require('dat-simple-server')
+express.use('/', middlewware(`${process.cwd()}/www`, 30000))
+```
