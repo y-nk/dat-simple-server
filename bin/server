@@ -4,7 +4,7 @@ const { default: server } = require("../lib/server");
 
 const argv = require("yargs").argv;
 
-const root = argv.public ?? `${__dirname}/www`;
+const root = argv.public ?? `${process.cwd()}/www`;
 const port = argv.port ?? 8001;
 
 server(root, port);
