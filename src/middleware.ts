@@ -1,7 +1,7 @@
 declare function require(module: string): any;
 
 import { join } from 'path'
-import { RequestListener, IncomingMessage, ServerResponse } from 'http'
+import { Handler, Request, Response } from 'express';
 import { runInNewContext } from 'vm'
 
 const payload = (file: string): string => (`
@@ -25,11 +25,11 @@ const payload = (file: string): string => (`
   })()
 `)
 
-export default (root: string, timeout = 30000): RequestListener => (req: IncomingMessage, res: ServerResponse) => {
-  const [path] = req.url!.split('?')
+export default (root: string, timeout = 30000): Handler => (req: Request, res: Response) => {
+  const path = root.startsWith('/') ? root : join(`${process.cwd()}`, root)
 
   // forbid ../ for path escalation
-  const file = join(root, path.replace(/\.\.?\//g, ''))
+  const file = join(path, req.path.replace(/\.\.?\//g, ''))
 
   return runInNewContext(
     payload(file), {
