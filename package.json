@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@ef-carbon/tspm": "^2.2.5",
-    "@types/node": "^13.1.8",
+    "@types/node": "^13.13.52",
     "typescript": "^3.7.5"
   }
 }
