@@ -8,9 +8,8 @@
     "dss": "bin/server"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --project . && ef-tspm",
-    "deploy": "cp -r ./{package.json,src,bin} lib/ && npm publish lib/ && rm -rf lib/"
+    "postversion": "cp -r ./{package.json,src,bin} lib/ && npm publish lib/ && rm -rf lib/ && git push --follow-tags"
   },
   "keywords": [],
   "author": "",
