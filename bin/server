@@ -5,7 +5,7 @@ const { default: server } = require("../server");
 const argv = require("yargs").argv;
 
 server(
-  argv.public ?? `${process.cwd()}/www`,
+  argv.public ?? process.cwd(),
   argv.port,
   argv.host,
 );
