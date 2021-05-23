@@ -4,8 +4,10 @@ import { IncomingMessage, ServerResponse } from 'http'
 import { runInNewContext } from 'vm'
 
 const payload = (file: string): string => (`
-  const lambda = require('${file}')
-  lambda(req, res)
+  (async () => {
+    const lambda = require('${file}')
+    await lambda(req, res)
+  })()
 `)
 
 export default (path: string, req: IncomingMessage, res: ServerResponse, timeout: number = 30000) => {
@@ -19,4 +21,3 @@ export default (path: string, req: IncomingMessage, res: ServerResponse, timeout
     }, { timeout }
   )
 }
-
